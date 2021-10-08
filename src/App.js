@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Character from './components/Character';
 
-const App = (props) => {
+const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
   const [who, setWho] = useState([])
@@ -16,7 +16,7 @@ const App = (props) => {
     setCurrentCharacterId(id)
   }
 
-  const closedDetails = () => {
+  const closeDetails = () => {
     setCurrentCharacterId(null)
   }
 
@@ -30,11 +30,8 @@ const App = (props) => {
   },[])
 
   const Who = props => (
-    <div className="charcter">
-      {props.info.name}
-      <button onClick={() => openDetails(props.info.id)}>
-        see more
-      </button>
+    <div className="charcter-info container">
+      {props.info.name} {props.info.birth_year}
     </div>
   )
 
@@ -45,10 +42,13 @@ const App = (props) => {
       {
 who.map(wh => {
   return <Who key={wh.id} info={wh} />
-})
+}, [])
+}
+{
+  currentCharacterId && <Character characterId={currentCharacterId} />
 }
     </div>
-  );
+  )
 }
 
 export default App;
